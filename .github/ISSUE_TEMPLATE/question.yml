@@ -1,0 +1,69 @@
+name: Question/Support
+description: Ask a question or request support
+labels: ["question", "support"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reaching out! Please fill out the sections below to help us provide the best support.
+
+  - type: dropdown
+    id: question-type
+    attributes:
+      label: Question Type
+      description: What type of question or support do you need?
+      options:
+        - How-to/Usage Question
+        - Configuration Help
+        - Troubleshooting
+        - Best Practices
+        - Integration Help
+        - Performance Optimization
+        - Security Guidance
+        - General Understanding
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your Question
+      description: Please ask your question clearly and provide as much context as possible.
+      placeholder: "I'm trying to understand how to..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Details
+      description: Provide information about your setup (if relevant to your question).
+      placeholder: |
+        - OS: [e.g. macOS 13.0]
+        - Node.js version: [e.g. 18.12.0]
+        - Package version: [e.g. 1.2.3]
+        - Other relevant tools/versions:
+
+  - type: textarea
+    id: code-example
+    attributes:
+      label: Code Example (if applicable)
+      description: Share relevant code snippets or configuration files.
+      placeholder: |
+        ```javascript
+        // Your code here
+        ```
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency Level
+      description: How urgent is this question for you?
+      options:
+        - Low - General curiosity or future planning
+        - Medium - Would help improve current workflow
+        - High - Blocking current development
+        - Critical - Production issue or deadline-driven
+    validations:
+      required: true
