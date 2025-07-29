@@ -1,0 +1,67 @@
+name: Enhancement Request
+description: Suggest an improvement to existing functionality
+labels: ["improvement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting an enhancement! Please fill out the sections below to help us understand your suggestion.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Enhancement Summary
+      description: Provide a clear and concise summary of the enhancement you're suggesting.
+      placeholder: "I would like to improve..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: Describe how the feature currently works.
+      placeholder: "Currently, when I..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-behavior
+    attributes:
+      label: Proposed Enhancement
+      description: Describe the improvement you'd like to see.
+      placeholder: "I would like it to..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How important is this enhancement to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would improve workflow
+        - High - Significantly impacts usability
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation-ideas
+    attributes:
+      label: Implementation Ideas
+      description: If you have ideas on how this could be implemented, share them here.
+      placeholder: "This could potentially be implemented by..."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Describe any alternative solutions or workarounds you've considered.
+      placeholder: "I've considered..."
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, screenshots, or examples that might be helpful.
