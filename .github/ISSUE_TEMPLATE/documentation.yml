@@ -1,0 +1,90 @@
+name: Documentation Update
+description: Report missing, incorrect, or outdated documentation
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve our documentation! Please fill out the sections below to help us understand what needs to be updated.
+
+  - type: dropdown
+    id: doc-type
+    attributes:
+      label: Documentation Type
+      description: What type of documentation needs attention?
+      options:
+        - README.md
+        - API Documentation
+        - Installation Guide
+        - User Guide/Tutorial
+        - Contributing Guidelines
+        - Code Comments
+        - Configuration Documentation
+        - Troubleshooting Guide
+        - Changelog
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What kind of documentation issue is this?
+      options:
+        - Missing Documentation
+        - Incorrect Information
+        - Outdated Content
+        - Unclear/Confusing Content
+        - Typo/Grammar Error
+        - Missing Examples
+        - Broken Links
+        - Formatting Issues
+        - Translation Needed
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Documentation Location
+      description: Where is the documentation issue located? Provide file path, URL, or section name.
+      placeholder: "File: docs/api.md, Section: Authentication, Line: 45"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-content
+    attributes:
+      label: Current Content (if applicable)
+      description: Copy the current text that needs to be updated.
+      placeholder: "The current documentation says..."
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: Describe what's wrong with the current documentation or what's missing.
+      placeholder: "The problem is..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-content
+    attributes:
+      label: Suggested Content/Fix
+      description: If you have suggestions for how to fix or improve the documentation, share them here.
+      placeholder: "I suggest changing it to..."
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this documentation update?
+      options:
+        - Critical - Blocks user adoption or causes confusion
+        - High - Significantly impacts user experience
+        - Medium - Would improve clarity or completeness
+        - Low - Minor improvement or correction
+    validations:
+      required: true
