@@ -1,0 +1,189 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* Duelr Brand Colors - Bauhaus-inspired palette */
+  --accent-red: #e63946;
+  --dark: #262626;
+  --white: #ffffff;
+
+  /* Border radius */
+  --radius: 0.625rem;
+
+  /* Light mode - clean white foundation */
+  --background: var(--white);
+  --foreground: var(--dark);
+  --card: var(--white);
+  --card-foreground: var(--dark);
+  --popover: var(--white);
+  --popover-foreground: var(--dark);
+
+  /* Primary uses accent-red for brand moments */
+  --primary: var(--accent-red);
+  --primary-foreground: var(--white);
+
+  /* Secondary uses subtle grays */
+  --secondary: #f8f9fa;
+  --secondary-foreground: var(--dark);
+
+  /* Muted for subtle UI elements */
+  --muted: #f1f3f4;
+  --muted-foreground: #6c757d;
+
+  /* Accent reserved for brand highlights */
+  --accent: var(--accent-red);
+  --accent-foreground: var(--white);
+
+  /* Destructive - using dark instead of red to preserve brand color exclusivity */
+  --destructive: var(--dark);
+
+  /* Borders and inputs - subtle grays for clean hierarchy */
+  --border: #e9ecef;
+  --input: #f8f9fa;
+  --ring: var(--accent-red);
+
+  /* Chart colors - minimal palette using brand colors and grays */
+  --chart-1: var(--accent-red);
+  --chart-2: var(--dark);
+  --chart-3: #6c757d;
+  --chart-4: #adb5bd;
+  --chart-5: #dee2e6;
+
+  /* Sidebar - clean white with dark text */
+  --sidebar: var(--white);
+  --sidebar-foreground: var(--dark);
+  --sidebar-primary: var(--accent-red);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: #f8f9fa;
+  --sidebar-accent-foreground: var(--dark);
+  --sidebar-border: #e9ecef;
+  --sidebar-ring: var(--accent-red);
+}
+
+.dark {
+  /* Dark mode - using brand dark color */
+  --background: var(--dark);
+  --foreground: var(--white);
+  --card: #333333;
+  --card-foreground: var(--white);
+  --popover: #333333;
+  --popover-foreground: var(--white);
+
+  /* Primary maintains accent-red in dark mode */
+  --primary: var(--accent-red);
+  --primary-foreground: var(--white);
+
+  /* Secondary uses darker grays */
+  --secondary: #404040;
+  --secondary-foreground: var(--white);
+
+  /* Muted for subtle dark UI elements */
+  --muted: #404040;
+  --muted-foreground: #a0a0a0;
+
+  /* Accent maintains brand color */
+  --accent: var(--accent-red);
+  --accent-foreground: var(--white);
+
+  /* Destructive maintains dark approach */
+  --destructive: #cc3333;
+
+  /* Dark mode borders and inputs */
+  --border: #404040;
+  --input: #333333;
+  --ring: var(--accent-red);
+
+  /* Dark mode chart colors */
+  --chart-1: var(--accent-red);
+  --chart-2: var(--white);
+  --chart-3: #a0a0a0;
+  --chart-4: #808080;
+  --chart-5: #606060;
+
+  /* Dark sidebar */
+  --sidebar: var(--dark);
+  --sidebar-foreground: var(--white);
+  --sidebar-primary: var(--accent-red);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: #404040;
+  --sidebar-accent-foreground: var(--white);
+  --sidebar-border: #404040;
+  --sidebar-ring: var(--accent-red);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    /* Bauhaus-inspired typography with clean, geometric feel */
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* High contrast focus styles for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-ring outline-offset-2;
+  }
+
+  /* Ensure proper contrast ratios for text */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Clean, minimal button and interactive element styling */
+  button,
+  [role="button"] {
+    @apply transition-colors duration-200;
+  }
+}

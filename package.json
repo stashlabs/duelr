@@ -1,0 +1,69 @@
+{
+  "name": "duelr",
+  "version": "0.1.0",
+  "description": "Open source tool to compare LLM responses across models. See latency, response quality, and cost in one click.",
+  "private": false,
+  "keywords": [
+    "llm",
+    "ai",
+    "comparison",
+    "openai",
+    "claude",
+    "gpt",
+    "anthropic",
+    "open-source"
+  ],
+  "author": "Duelr Team",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/duelr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/duelr/issues"
+  },
+  "homepage": "https://github.com/your-org/duelr#readme",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.57.0",
+    "@radix-ui/react-select": "^2.2.5",
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.532.0",
+    "next": "15.4.4",
+    "openai": "^5.10.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.4",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.6",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  }
+}
