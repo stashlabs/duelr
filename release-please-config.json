@@ -14,7 +14,6 @@
         { "type": "ci", "section": "👷 CI/CD" },
         { "type": "revert", "section": "⏪ Reverts" }
       ],
-      "release-as": "0.1.0",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": false,
       "draft": false,
