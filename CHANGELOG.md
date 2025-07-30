@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/stashlabs/duelr/compare/v0.1.0...v0.1.1) (2025-07-30)
+
+
+### 👷 CI/CD
+
+* remove release-as config to be used for the first time ([527fc3e](https://github.com/stashlabs/duelr/commit/527fc3e8ebe6bfce52dbce1aaa87b48d5c1bce32))
+
 ## 0.1.0 (2025-07-30)
 
 
