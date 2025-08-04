@@ -113,8 +113,8 @@ export function calculateScores(
  * Get color coding for cost based on thresholds
  */
 export function getCostColor(cost: number): "green" | "yellow" | "red" {
-  if (cost < 0.001) return "green";
-  if (cost < 0.01) return "yellow";
+  if (cost < 0.0005) return "green";
+  if (cost < 0.008) return "yellow";
   return "red";
 }
 
@@ -122,5 +122,13 @@ export function getCostColor(cost: number): "green" | "yellow" | "red" {
  * Format cost for display
  */
 export function formatCost(cost: number): string {
-  return `$${cost.toFixed(4)}`;
+  if (cost < 0.0001) {
+    return `$${cost.toFixed(6)}`;
+  } else if (cost < 0.01) {
+    return `$${cost.toFixed(5)}`;
+  } else if (cost < 1) {
+    return `$${cost.toFixed(4)}`;
+  } else {
+    return `$${cost.toFixed(2)}`;
+  }
 }
