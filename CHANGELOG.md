@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/stashlabs/duelr/compare/v0.1.1...v0.1.2) (2025-08-04)
+
+
+### 🐛 Bug Fixes
+
+* update cost thresholds and formatting in scoring calculations ([326cdcf](https://github.com/stashlabs/duelr/commit/326cdcf1c2bf720c262ba697eae20d9b5f96a46f))
+
 ## [0.1.1](https://github.com/stashlabs/duelr/compare/v0.1.0...v0.1.1) (2025-07-30)
 
 
