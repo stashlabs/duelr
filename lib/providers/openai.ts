@@ -13,7 +13,6 @@ export interface LLMResponse {
 export async function callOpenAI(
   model: string,
   prompt: string,
-  structuredOutput: boolean = false,
 ): Promise<LLMResponse> {
   if (!process.env.OPENAI_API_KEY) {
     throw new Error("OpenAI API key not configured");

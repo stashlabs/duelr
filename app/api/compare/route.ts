@@ -14,7 +14,7 @@ import { callAnthropic } from "@/lib/providers/anthropic";
 export async function POST(request: NextRequest) {
   try {
     const body: ComparisonRequest = await request.json();
-    const { prompt, models, structuredOutput = false } = body;
+    const { prompt, models, structuredOutput = false, jsonSchema } = body;
 
     if (!prompt || !models || models.length === 0) {
       return NextResponse.json(
@@ -50,14 +50,10 @@ export async function POST(request: NextRequest) {
 
           switch (model.provider) {
             case MODEL_PROVIDER.OpenAI:
-              result = await callOpenAI(model.model, prompt, structuredOutput);
+              result = await callOpenAI(model.model, prompt);
               break;
             case MODEL_PROVIDER.Anthropic:
-              result = await callAnthropic(
-                model.model,
-                prompt,
-                structuredOutput,
-              );
+              result = await callAnthropic(model.model, prompt);
               break;
             default:
               throw new Error(`Provider ${model.provider} not supported`);
@@ -71,6 +67,7 @@ export async function POST(request: NextRequest) {
             result.response,
             result.completionTokens,
             structuredOutput,
+            jsonSchema,
           );
 
           return {
@@ -97,7 +94,8 @@ export async function POST(request: NextRequest) {
             scores: {
               lengthSimplicity: 0,
               readability: 0,
-              jsonValidity: false,
+              jsonValidity: null,
+              validationErrors: ["Request failed"],
             },
             error: error instanceof Error ? error.message : "Unknown error",
           };
@@ -119,7 +117,12 @@ export async function POST(request: NextRequest) {
           completionTokens: 0,
           totalTokens: 0,
           cost: 0,
-          scores: { lengthSimplicity: 0, readability: 0, jsonValidity: false },
+          scores: {
+            lengthSimplicity: 0,
+            readability: 0,
+            jsonValidity: null,
+            validationErrors: ["Processing failed"],
+          },
           error: result.reason?.message || "Failed to process request",
         };
       }
