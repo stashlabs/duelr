@@ -27,7 +27,6 @@ export async function callOpenAI(
           content: prompt,
         },
       ],
-      temperature: 0.7,
       max_tokens: 1000,
     });
 

@@ -22,7 +22,6 @@ export async function callAnthropic(
     const message = await anthropic.messages.create({
       model,
       max_tokens: 1000,
-      temperature: 0.7,
       messages: [
         {
           role: "user",
