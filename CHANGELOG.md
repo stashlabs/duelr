@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.2.0](https://github.com/stashlabs/duelr/compare/v0.1.2...v0.2.0) (2025-08-08)
+
+
+### ✨ Features
+
+* add JSON schema detection and validation utilities ([89cdf0f](https://github.com/stashlabs/duelr/commit/89cdf0f081063c8c398bd295ced4fcfdb7e93eef))
+* enhance ResultsGrid component to display validation errors ([eff163c](https://github.com/stashlabs/duelr/commit/eff163cff403b6be98750c917da1ee8467f997c2))
+* enhance scoring calculations with JSON validation logic and error handling ([a3d17c6](https://github.com/stashlabs/duelr/commit/a3d17c6331018e2c9aeabf13f8654daa34dfeea9))
+* implement JSON schema validation in comparison tool with auto-detection and user input options ([680f730](https://github.com/stashlabs/duelr/commit/680f730e2bdb95aedf4a32b05da7521012d854f1))
+* update API to include jsonSchema in requests and adjust handling in response scoring ([0ad0290](https://github.com/stashlabs/duelr/commit/0ad029000af5ccee536e3c5d24d5fb3819a2d17f))
+* update ResponseScores interface to allow null jsonValidity and add validationErrors property ([e301dc2](https://github.com/stashlabs/duelr/commit/e301dc22fbd9d7695cd5cd37413897d69ccccb20))
+
+
+### 🐛 Bug Fixes
+
+* add eslint-disable comments for better code linting in page and utils files ([0b3a16a](https://github.com/stashlabs/duelr/commit/0b3a16a7b8cfde9f7eb14bd813463dfd19820a85))
+
 ## [0.1.2](https://github.com/stashlabs/duelr/compare/v0.1.1...v0.1.2) (2025-08-04)
 
 
