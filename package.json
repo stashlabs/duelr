@@ -1,6 +1,6 @@
 {
   "name": "duelr",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Open source tool to compare LLM responses across models. See latency, response quality, and cost in one click.",
   "private": false,
   "keywords": [
