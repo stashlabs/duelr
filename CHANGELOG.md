@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/stashlabs/duelr/compare/v0.2.0...v0.3.0) (2025-08-08)
+
+
+### ✨ Features
+
+* add support for GPT-5 models ([46b965f](https://github.com/stashlabs/duelr/commit/46b965fc8e77ffc995f5e9bb7a232dba09c4aba8))
+
+
+### ♻️ Code Refactoring
+
+* remove temperature parameter from API calls in Anthropic and OpenAI providers ([a8bc13a](https://github.com/stashlabs/duelr/commit/a8bc13ab0dfd61f280ef332159e6ab08b9700e8c))
+* rename max_tokens to max_completion_tokens in OpenAI API call ([9937467](https://github.com/stashlabs/duelr/commit/9937467e1f1426e058a593eb6b11d0316537e423))
+
 ## [0.2.0](https://github.com/stashlabs/duelr/compare/v0.1.2...v0.2.0) (2025-08-08)
 
 
