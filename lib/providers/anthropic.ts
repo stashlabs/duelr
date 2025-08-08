@@ -13,7 +13,6 @@ export interface LLMResponse {
 export async function callAnthropic(
   model: string,
   prompt: string,
-  structuredOutput: boolean = false,
 ): Promise<LLMResponse> {
   if (!process.env.ANTHROPIC_API_KEY) {
     throw new Error("Anthropic API key not configured");
