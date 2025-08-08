@@ -54,8 +54,8 @@ export function detectJSONSchema(text: string): string | null {
  * Returns validation result with errors if any
  */
 export function validateJSONSchema(
-  data: any,
-  schema: any,
+  data: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  schema: any, // eslint-disable-line @typescript-eslint/no-explicit-any
 ): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
 

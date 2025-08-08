@@ -41,6 +41,7 @@ export default function Home() {
       setDetectedSchema(null);
       setEnableJsonValidation(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [prompt]);
 
   const handleRunComparison = async () => {
