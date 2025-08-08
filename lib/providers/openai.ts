@@ -27,7 +27,7 @@ export async function callOpenAI(
           content: prompt,
         },
       ],
-      max_tokens: 1000,
+      max_completion_tokens: 1000,
     });
 
     const response = completion.choices[0]?.message?.content || "";
