@@ -1,4 +1,5 @@
 import { ResponseScores } from "./types";
+import { validateJSONSchema } from "./utils";
 
 /**
  * Calculate length simplicity score (tokens ÷ sentences)
@@ -53,6 +54,30 @@ export function isValidJSON(text: string): boolean {
 }
 
 /**
+ * Validate JSON response against a provided schema
+ */
+export function validateJSONResponse(
+  text: string,
+  schema?: string,
+): { valid: boolean; errors: string[] } {
+  try {
+    const parsed = JSON.parse(text.trim());
+
+    if (!schema) {
+      return { valid: true, errors: [] };
+    }
+
+    const parsedSchema = JSON.parse(schema);
+    return validateJSONSchema(parsed, parsedSchema);
+  } catch (error) {
+    return {
+      valid: false,
+      errors: [error instanceof Error ? error.message : "Invalid JSON format"],
+    };
+  }
+}
+
+/**
  * Count sentences in text using basic punctuation
  */
 function countSentences(text: string): number {
@@ -100,12 +125,34 @@ function countSyllables(text: string): number {
 export function calculateScores(
   text: string,
   tokens: number,
-  isStructuredPrompt: boolean = false,
+  isStructuredPrompt: boolean,
+  jsonSchema?: string,
 ): ResponseScores {
+  let jsonValidity = null;
+  let validationErrors: string[] | undefined = undefined;
+
+  if (isStructuredPrompt) {
+    if (jsonSchema) {
+      // Validate against schema
+      const validation = validateJSONResponse(text, jsonSchema);
+      jsonValidity = validation.valid;
+      if (!validation.valid) {
+        validationErrors = validation.errors;
+      }
+    } else {
+      // Just check if it's valid JSON
+      jsonValidity = isValidJSON(text);
+      if (!jsonValidity) {
+        validationErrors = ["Invalid JSON format"];
+      }
+    }
+  }
+
   return {
     lengthSimplicity: calculateLengthSimplicity(text, tokens),
     readability: calculateReadability(text),
-    jsonValidity: isStructuredPrompt ? isValidJSON(text) : true,
+    jsonValidity,
+    validationErrors,
   };
 }
 
