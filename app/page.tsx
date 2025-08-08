@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +15,7 @@ import { AVAILABLE_MODELS } from "@/lib/types";
 import { ComparisonResult } from "@/lib/types";
 import { ModelSelector } from "@/components/model-selector";
 import { ResultsGrid } from "@/components/results-grid";
+import { detectJSONSchema } from "@/lib/utils";
 import Image from "next/image";
 
 export default function Home() {
@@ -22,12 +23,35 @@ export default function Home() {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<ComparisonResult | null>(null);
+  const [jsonSchema, setJsonSchema] = useState("");
+  const [detectedSchema, setDetectedSchema] = useState<string | null>(null);
+  const [enableJsonValidation, setEnableJsonValidation] = useState(false);
+
+  // Detect JSON schema from prompt
+  useEffect(() => {
+    if (prompt) {
+      const detected = detectJSONSchema(prompt);
+      setDetectedSchema(detected);
+      if (detected && !jsonSchema) {
+        setJsonSchema(detected);
+        setEnableJsonValidation(true);
+      }
+    } else {
+      setJsonSchema("");
+      setDetectedSchema(null);
+      setEnableJsonValidation(false);
+    }
+  }, [prompt]);
 
   const handleRunComparison = async () => {
     if (!prompt.trim() || selectedModels.length === 0) return;
 
     setIsLoading(true);
     try {
+      const finalSchema = enableJsonValidation
+        ? jsonSchema || detectedSchema
+        : undefined;
+
       const response = await fetch("/api/compare", {
         method: "POST",
         headers: {
@@ -36,7 +60,8 @@ export default function Home() {
         body: JSON.stringify({
           prompt,
           models: selectedModels,
-          structuredOutput: false,
+          structuredOutput: enableJsonValidation,
+          jsonSchema: finalSchema,
         }),
       });
 
@@ -95,7 +120,61 @@ export default function Home() {
                 className="min-h-32"
               />
             </div>
+            {/* JSON Schema Validation Section */}
+            <div className="space-y-4 border-t pt-4">
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="enableJsonValidation"
+                  checked={enableJsonValidation}
+                  onChange={(e) => setEnableJsonValidation(e.target.checked)}
+                  className="rounded border-gray-300"
+                />
+                <label
+                  htmlFor="enableJsonValidation"
+                  className="text-sm font-medium"
+                >
+                  Enable JSON Schema Validation
+                </label>
+                {detectedSchema && (
+                  <Badge variant="secondary" className="text-xs">
+                    Schema detected in prompt
+                  </Badge>
+                )}
+              </div>
 
+              {enableJsonValidation && (
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    JSON Schema
+                    {detectedSchema && (
+                      <span className="text-xs text-muted-foreground ml-2">
+                        (Auto-detected from prompt - modify in prompt to change)
+                      </span>
+                    )}
+                  </label>
+                  <Textarea
+                    placeholder="Enter your JSON schema here... or include it in the prompt above"
+                    value={detectedSchema || jsonSchema}
+                    onChange={(e) => {
+                      if (!detectedSchema) {
+                        setJsonSchema(e.target.value);
+                      }
+                    }}
+                    disabled={!!detectedSchema}
+                    className={`min-h-32 font-mono text-sm ${
+                      detectedSchema ? "bg-gray-50 text-gray-600" : ""
+                    }`}
+                  />
+                  {detectedSchema && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      To modify this schema, edit it in the prompt text area
+                      above.
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
             <div>
               <label className="block text-sm font-medium mb-2">
                 Select Models ({selectedModels.length} selected)
@@ -106,17 +185,24 @@ export default function Home() {
                 onSelectionChange={setSelectedModels}
               />
             </div>
-
             <Button
               onClick={handleRunComparison}
               disabled={
-                !prompt.trim() || selectedModels.length === 0 || isLoading
+                !prompt.trim() ||
+                selectedModels.length === 0 ||
+                isLoading ||
+                (enableJsonValidation && !jsonSchema && !detectedSchema)
               }
-              className="bg-primary hover:bg-primary/90 text-white"
+              className="bg-primary hover:bg-primary/90 text-white my-2"
               size="lg"
             >
               {isLoading ? "Running Comparison..." : "Run Comparison"}
             </Button>
+            {enableJsonValidation && !jsonSchema && !detectedSchema && (
+              <p className="text-sm text-destructive pt-0">
+                * Please provide a JSON schema or include one in your prompt.
+              </p>
+            )}
           </CardContent>
         </Card>
 
