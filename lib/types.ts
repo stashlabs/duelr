@@ -33,7 +33,8 @@ export interface ModelResponse {
 export interface ResponseScores {
   lengthSimplicity: number; // tokens ÷ sentences
   readability: number; // Flesch reading ease score
-  jsonValidity: boolean; // for structured prompts
+  jsonValidity: boolean | null; // for structured prompts
+  validationErrors?: string[]; // JSON schema validation errors
 }
 
 export interface ComparisonResult {
