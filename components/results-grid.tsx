@@ -6,7 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatCost, getCostColor } from "@/lib/scoring";
-import { Copy, Clock, Hash, CheckCircle, XCircle } from "lucide-react";
+import {
+  Copy,
+  Clock,
+  Hash,
+  CheckCircle,
+  XCircle,
+  CircleMinus,
+} from "lucide-react";
 
 interface ResultsGridProps {
   results: ComparisonResult;
@@ -132,12 +139,33 @@ export function ResultsGrid({ results }: ResultsGridProps) {
 
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">JSON Valid:</span>
-                  {response.scores.jsonValidity ? (
+                  {response.scores.jsonValidity === true ? (
                     <CheckCircle className="h-3 w-3 text-green-600" />
-                  ) : (
+                  ) : response.scores.jsonValidity === false ? (
                     <XCircle className="h-3 w-3 text-red-600" />
+                  ) : (
+                    <CircleMinus className="h-3 w-3 text-gray-600" />
                   )}
                 </div>
+
+                {/* Show validation errors if any */}
+                {response.scores.validationErrors &&
+                  response.scores.validationErrors.length > 0 && (
+                    <div className="mt-2">
+                      <span className="text-xs font-medium text-red-600 block mb-1">
+                        Validation Errors:
+                      </span>
+                      <div className="bg-red-50 border border-red-200 rounded p-2 max-h-20 overflow-y-auto">
+                        {response.scores.validationErrors.map(
+                          (error, index) => (
+                            <div key={index} className="text-xs text-red-700">
+                              • {error}
+                            </div>
+                          ),
+                        )}
+                      </div>
+                    </div>
+                  )}
               </div>
             </div>
           </CardContent>
